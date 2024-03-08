@@ -19,19 +19,19 @@ namespace PatientProject.Core.Services
             _patientRepository.Create(patient);
         }
 
-        public void Delete(int id) => _patientRepository.Delete(id);
+        public void Delete(Guid id) => _patientRepository.Delete(id);
 
-        public PatientResponseDTO GetById(int id) =>
-            AutoMapperCustomConfig.AutoMapPatient(_patientRepository.GetResultSpec(q => q.Where(p => p.Id == id)));
+        public PatientResponseDTO GetById(Guid id) =>
+            AutoMapperCustomConfig.AutoMapPatient(_patientRepository.GetResultSpec(q => q.Where(p => p.Id.Equals(id))));
 
-        public bool IsExists(int id) => _patientRepository.GetResultSpec(x => x.Any(a => a.Id == id));
+        public bool IsExists(Guid id) => _patientRepository.GetResultSpec(x => x.Any(a => a.Id.Equals(id)));
 
         public IEnumerable<PatientResponseDTO> List(bool isActive) =>
             AutoMapperCustomConfig.AutoMapListPatient(_patientRepository.GetResultSpec(q => q.Where(p => p.IsActive == isActive)));
 
-        public void ToggleState(int id)
+        public void ToggleState(Guid id)
         {
-            var patient = _patientRepository.GetResultSpec(q => q.Where(p => p.Id == id)).FirstOrDefault();
+            var patient = _patientRepository.GetResultSpec(q => q.Where(p => p.Id.Equals(id))).FirstOrDefault();
             patient.IsActive = !patient.IsActive;
             _patientRepository.Update(patient);
         }

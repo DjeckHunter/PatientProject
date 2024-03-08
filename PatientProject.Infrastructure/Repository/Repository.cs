@@ -28,16 +28,16 @@ namespace PatientProject.Infrastructure.Repository
             _context.SaveChanges();
         }
 
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
-            var entity = _context.Set<T>().SingleOrDefault(x => x.Id == id);
+            var entity = _context.Set<T>().Single(x => x.Id.Equals(id));
             _context.Remove(entity);
             _context.SaveChanges();
         }
 
         public void Update(T entity)
         {
-            var local = _context.Set<T>().Local.FirstOrDefault(l => l.Id.Equals(entity.Id));
+            var local = _context.Set<T>().Local.Single(l => l.Id.Equals(entity.Id));
             if (local != null)
                 _context.Entry(local).State = EntityState.Detached;
 

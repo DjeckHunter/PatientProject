@@ -19,7 +19,7 @@ public class PatientController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult Get([Required][FromQuery] int id) =>
+    public ActionResult Get([Required][FromQuery] Guid id) =>
         Ok(_patientService.GetById(id));
 
     [HttpGet("all")]
@@ -47,7 +47,7 @@ public class PatientController : ControllerBase
     }
 
     [HttpPut("togglestate")]
-    public ActionResult ToggleState([Required][FromQuery] int id)
+    public ActionResult ToggleState([Required][FromQuery] Guid id)
     {
         if (!_patientService.IsExists(id))
             return NotFound("Patient not found!");
@@ -57,7 +57,7 @@ public class PatientController : ControllerBase
     }
 
     [HttpDelete]
-    public ActionResult Delete(int id)
+    public ActionResult Delete(Guid id)
     {
         if (!_patientService.IsExists(id))
             return NotFound("Patient not found!");

@@ -14,14 +14,14 @@ namespace PatientProject.Core.Services
 
         public void Create(string name) => _genderRepository.Create(new Gender { Name = name, IsActive = true });
 
-        public void ToggleState(int id)
+        public void ToggleState(Guid id)
         {
-            var gender = _genderRepository.GetResultSpec(q => q.Where(p => p.Id == id)).FirstOrDefault();
+            var gender = _genderRepository.GetResultSpec(q => q.Where(p => p.Id.Equals(id))).FirstOrDefault();
             gender.IsActive = !gender.IsActive;
             _genderRepository.Update(gender);
         }
 
-        public bool IsExists(int id) => _genderRepository.GetResultSpec(x => x.Any(a => a.Id == id));
+        public bool IsExists(Guid id) => _genderRepository.GetResultSpec(x => x.Any(a => a.Id .Equals(id)));
         public bool IsExists(string name) => _genderRepository.GetResultSpec(x => x.Any(a => a.Name == name));
 
         public void Update(GenderUpdateRequest model) => _genderRepository.Update(AutoMapperConfig.AutoMap<GenderUpdateRequest, Gender>(model));
@@ -29,6 +29,6 @@ namespace PatientProject.Core.Services
         public IEnumerable<GenderResponseDTO> List(bool isActive) => 
             AutoMapperConfig.AutoMapList<GenderResponseDTO, Gender>(_genderRepository.GetListResultSpec(q => q.Where(p => p.IsActive == isActive)));
 
-        public void Delete(int id) => _genderRepository.Delete(id);
+        public void Delete(Guid id) => _genderRepository.Delete(id);
     }
 }

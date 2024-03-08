@@ -5,7 +5,7 @@
         public string Name { get; set; }
         public string Surname { get; set; }
         public string FullName { get; set; }
-        public int GenderId { get; set; }
+        public Guid GenderId { get; set; }
         public DateTime BirthDate { get; set; }
     }
 }

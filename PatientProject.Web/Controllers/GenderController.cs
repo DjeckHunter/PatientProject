@@ -38,7 +38,7 @@ namespace PatientProject.Web.Controllers
         }
 
         [HttpPut("togglestate")]
-        public ActionResult ToggleState([Required][FromQuery] int id)
+        public ActionResult ToggleState([Required][FromQuery] Guid id)
         {
             if (!_genderService.IsExists(id))
                 return NotFound("Gender not found!");
@@ -48,7 +48,7 @@ namespace PatientProject.Web.Controllers
         }
 
         [HttpDelete]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
             if (!_genderService.IsExists(id))
                 return NotFound("Gender not found!");

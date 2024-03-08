@@ -6,10 +6,10 @@ namespace PatientProject.Core.Interfaces.Services
     {
         void Create(PatientCreateRequestDTO model);
         void Update(PatientUpdateRequestDTO model);
-        PatientResponseDTO GetById(int id);
+        PatientResponseDTO GetById(Guid id);
         IEnumerable<PatientResponseDTO> List(bool isActive);
-        void Delete(int id);
-        void ToggleState(int id);
-        bool IsExists(int id);
+        void Delete(Guid id);
+        void ToggleState(Guid id);
+        bool IsExists(Guid id);
     }
 }

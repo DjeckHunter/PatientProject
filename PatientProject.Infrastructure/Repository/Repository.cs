@@ -2,7 +2,7 @@
 using PatientProject.Core.Entities;
 using PatientProject.Core.Interfaces.Generic;
 
-namespace PatientProject.Infrastructure
+namespace PatientProject.Infrastructure.Repository
 {
     internal class Repository<T> : IRepository<T> where T : BaseEntity
     {

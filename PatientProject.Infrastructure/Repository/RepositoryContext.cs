@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PatientProject.Core.Entities;
 
-namespace PatientProject.Infrastructure
+namespace PatientProject.Infrastructure.Repository
 {
     internal class RepositoryContext : DbContext
     {

@@ -2,6 +2,7 @@
 {
     public class Gender : BaseEntity
     {
-        public String Name { get; set; }
+        public string Name { get; set; }
+        public bool IsActive { get; set; }
     }
 }

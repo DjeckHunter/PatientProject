@@ -4,12 +4,12 @@ namespace PatientProject.Core.Entities;
 
 public class Patient : BaseEntity
 {
-    public String Name { get; set; }
+    public string Name { get; set; }
 
     [Required]
-    public String Surname { get; set; }
+    public string Surname { get; set; }
 
-    public String Patronymic { get; set; }
+    public string FullName { get; set; }
 
     [Required]
     public DateTime BirthDate { get; set; }

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using PatientProject.Core.DTOs.Patient;
 using PatientProject.Core.Interfaces.Services;
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace PatientProject.Web.Controllers;
 
@@ -23,13 +24,23 @@ public class PatientController : ControllerBase
         Ok(_patientService.GetById(id));
 
     [HttpGet("all")]
-    public ActionResult All([FromQuery] bool isActive = false) => 
-        Ok(_patientService.List(isActive));
+    public ActionResult All([FromQuery] bool isActive = false, [FromQuery] List<string>? parametrs = null)
+    {
+        Regex regex = new Regex("\\b(?:eq|ne|lt|gt|ge|le|sa|eb|ap)\\b|\\d{4}-\\d{2}-\\d{2}(?:T\\d{2}:\\d{2})?\r\n");
+        foreach (var item in parametrs)
+        {
+            MatchCollection matches = regex.Matches(item);
+            if (matches.Count < 1)
+                return BadRequest("Wrong parametr");
+        }
+
+        return Ok(_patientService.List(isActive, parametrs));
+    }
 
     [HttpPost]
     public ActionResult Create([Required][FromBody] PatientCreateRequestDTO model)
     {
-        if (_genderService.IsExists(model.GenderId))
+        if (!_genderService.IsExists(model.GenderId))
             return NotFound("Genter not found!");
 
         _patientService.Create(model);

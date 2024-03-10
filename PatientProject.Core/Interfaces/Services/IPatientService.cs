@@ -7,7 +7,7 @@ namespace PatientProject.Core.Interfaces.Services
         void Create(PatientCreateRequestDTO model);
         void Update(PatientUpdateRequestDTO model);
         PatientResponseDTO GetById(Guid id);
-        IEnumerable<PatientResponseDTO> List(bool isActive);
+        IEnumerable<PatientResponseDTO> List(bool isActive, List<string> parametrs);
         void Delete(Guid id);
         void ToggleState(Guid id);
         bool IsExists(Guid id);

@@ -16,7 +16,7 @@ public class Patient : BaseEntity
 
     public bool IsActive { get; set; }
 
-    public int? GenderId { get; set; }
+    public Guid? GenderId { get; set; }
 
     public Gender Gender { get; set; }
 }

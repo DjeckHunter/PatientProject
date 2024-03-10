@@ -47,10 +47,12 @@ namespace PatientProject.Core.Services
         public void Update(PatientUpdateRequestDTO model) => 
             _patientRepository.Update(AutoMapperConfig.AutoMap<PatientUpdateRequestDTO, Patient>(model));
 
+
+        //TODO
         private Expression<Func<Patient, bool>> CreatePredicate(Expression<Func<Patient, bool>> predicate, string parametr)
         {
-            var prefix = parametr.Substring(0, 2);
-            var date = Convert.ToDateTime(parametr.Substring(2));
+            var prefix = parametr[..2];
+            var date = Convert.ToDateTime(parametr[2..]);
             bool hasTime = date.TimeOfDay != TimeSpan.Zero;
 
             switch (prefix)

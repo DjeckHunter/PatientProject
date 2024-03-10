@@ -26,7 +26,7 @@ public class PatientController : ControllerBase
     [HttpGet("all")]
     public ActionResult All([FromQuery] bool isActive = false, [FromQuery] List<string>? parametrs = null)
     {
-        Regex regex = new Regex("\\b(?:eq|ne|lt|gt|ge|le|sa|eb|ap)\\b|\\d{4}-\\d{2}-\\d{2}(?:T\\d{2}:\\d{2})?\r\n");
+        Regex regex = new Regex(@"^(eq|ne|lt|gt|ge|le|sa|eb|ap)\d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?$");
         foreach (var item in parametrs)
         {
             MatchCollection matches = regex.Matches(item);
